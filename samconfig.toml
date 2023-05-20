@@ -41,5 +41,3 @@ parameter_overrides = "Stage=\"production\""
 image_repositories = []
 confirm_changeset = true
 disable_rollback = false
-
-
