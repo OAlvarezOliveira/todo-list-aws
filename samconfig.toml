@@ -2,7 +2,7 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "todo-list-aws"
+stack_name = "todo-list-aws-default"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1jyfyc9kgt86b" #Incluir bucket propio
 s3_prefix = "todo-list-aws"
 region = "us-east-1"
@@ -30,10 +30,12 @@ disable_rollback = true
 [production]
 [production.deploy]
 [production.deploy.parameters]
-stack_name = "aws-sam-production-deploy" 
+stack_name = "todo-list-aws-production" 
 s3_bucket = "aws-sam-production-deploy" #Incluir bucket propio
 s3_prefix = "todo-list-aws"
 region = "us-east-1"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Stage=\"production\""
 image_repositories = []
+disable_rollback = true
+
