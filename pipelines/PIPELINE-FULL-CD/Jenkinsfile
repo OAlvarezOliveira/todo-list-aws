@@ -14,6 +14,7 @@ pipeline {
                 sh script: """
                     set -x
                     git branch -a
+                    pwd
                     git checkout -b develop origin/develop
                     git checkout -b master origin/master
                     git merge develop
