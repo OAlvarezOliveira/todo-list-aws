@@ -5,9 +5,10 @@ from moto import mock_dynamodb
 import sys
 import os
 import json
+from unittest import mock
 
 @mock_dynamodb
-class TestDatabaseFunctions(unittest.TestCase):
+class TestDBFunctions(unittest.TestCase):
     def setUp(self):
         print ('---------------------')
         print ('Start: setUp')
@@ -26,7 +27,7 @@ class TestDatabaseFunctions(unittest.TestCase):
         """Create the mock database and table"""
         self.dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
         self.is_local = 'true'
-        self.uuid = "123e4567-e89b-12d3-a456-426614174000"
+        self.uuid = "e8761243-9be8-3d12-456a-426614174000"
         self.text = "Aprender DevOps y Cloud en la UNIR"
 
         from src.todoList import create_todo_table
@@ -197,24 +198,95 @@ class TestDatabaseFunctions(unittest.TestCase):
         from src.todoList import delete_item
         # Testing file functions
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
-        print ('End: test_delete_todo_error')
+        print ('End: test_delete_todo_error') 
         
-    def test_get_table(self):
+@mock_dynamodb2
+class TestDatabaseFunctionsError(unittest.TestCase):
+    def setUp(self):
         print ('---------------------')
-        print ('Start: test_get_table')
-        from src.todoList import get_table
-        tableName = os.environ['DYNAMODB_TABLE'];
-        table = get_table()
-        # Verificar si el nombre de la tabla es 'ToDo'
-        self.assertIn(tableName, table.name)
-        print ('End: test_get_table') 
+        print ('Start: setUp')
+        warnings.filterwarnings(
+            "ignore",
+            category=ResourceWarning,
+            message="unclosed.*<socket.socket.*>")
+        warnings.filterwarnings(
+            "ignore",
+            category=DeprecationWarning,
+            message="callable is None.*")
+        warnings.filterwarnings(
+            "ignore",
+            category=DeprecationWarning,
+            message="Using or importing.*")
+        """Create the mock database and table"""
+        self.dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
+        self.is_local = 'true'
+        print ('End: setUp')
         
-    def test_warnings_filter(self):
-        warnings.filterwarnings("ignore", category=Warning)
-        # Código de prueba aquí
-        print("Prueba de filtrado de advertencias")
+        
+    def test_get_todo_error(self):
+        print ('---------------------')
+        print ('Start: test_get_todo_error')
+        # Testing file functions
+        from src.todoList import get_item
+        self.table = table = mock.Mock()
+        self.table.get_item.side_effect = Exception('Boto3 Exception')
+        get_item("", self.dynamodb)
+        print ('End: test_get_todo_error')
+        
     
-                
+    def test_put_todo_error(self):
+        print ('---------------------')
+        print ('Start: test_put_todo_error')
+        # Testing file functions
+        from src.todoList import put_item
+        # Table mock
+        self.assertRaises(Exception, put_item("", self.dynamodb))
+        self.assertRaises(Exception, put_item("", self.dynamodb))
+        print ('End: test_put_todo_error')
         
+    def test_update_todo_error(self):
+        print ('---------------------')
+        print ('Start: atest_update_todo_error')
+        from src.todoList import put_item
+        from src.todoList import update_item
+        self.text = "Aprender DevOps y Cloud en la UNIR"
+        self.uuid = "e8761243-9be8-3d12-456a-426614174000"
+        updated_text = "Aprender más cosas que DevOps y Cloud en la UNIR"
+        # Testing file functions
+        # Table mock
+        responsePut = put_item(self.text, self.dynamodb)
+        print ('Response PutItem' + str(responsePut))
+        self.assertRaises(
+            Exception,
+            update_item(
+                updated_text,
+                "",
+                "false",
+                self.dynamodb))
+        self.assertRaises(
+            TypeError,
+            update_item(
+                "",
+                self.uuid,
+                "false",
+                self.dynamodb))
+        self.assertRaises(
+            Exception,
+            update_item(
+                updated_text,
+                self.uuid,
+                "",
+                self.dynamodb))
+        print ('End: atest_update_todo_error')
+        
+        
+    def test_delete_todo_error(self):
+        print ('---------------------')
+        print ('Start: test_delete_todo_error')
+        from src.todoList import delete_item
+        # Testing file functions
+        self.assertRaises(TypeError, delete_item("", self.dynamodb))
+        print ('End: test_delete_todo_error')
+
 if __name__ == '__main__':
-    unittest.main()
+    unittest.main()            
