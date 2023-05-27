@@ -26,4 +26,4 @@ coverage xml
 coverage xml -o coverage.xml
 
 # Analizar el informe XML de Cobertura para mostrar las líneas no cubiertas
-cobertura-coverage.sh report --xml=coverage.xml --uncovered-only
+coverage report --show-missing
