@@ -205,9 +205,16 @@ class TestDatabaseFunctions(unittest.TestCase):
         from src.todoList import get_table
         tableName = os.environ['DYNAMODB_TABLE'];
         table = get_table()
-        # check if the table name is 'ToDo'
+        # Verificar si el nombre de la tabla es 'ToDo'
         self.assertIn(tableName, table.name)
-        print ('End: test_get_table')
+        print ('End: test_get_table') 
+        
+    def test_warnings_filter(self):
+        warnings.filterwarnings("ignore", category=Warning)
+        # Código de prueba aquí
+        print("Prueba de filtrado de advertencias")
+    
+                
         
 if __name__ == '__main__':
     unittest.main()
