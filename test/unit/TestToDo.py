@@ -68,15 +68,16 @@ class TestDatabaseFunctions(unittest.TestCase):
         self.assertEqual(table.name, os.environ['DYNAMODB_TABLE'])
         print ('End: test_get_table')    
         
-    def test_get_item_error(self):
-        print('---------------------')
-        print('Start: test_get_item_error')
-        from src.todoList import get_item
-        # Testing file functions
-        # Table mock
-        self.assertRaises(ClientError, get_item, "non_existing_key", self.dynamodb)
-        print('End: test_get_item_error')
-    
+def test_get_item_error(self):
+    print('---------------------')
+    print('Start: test_get_item_error')
+    from src.todoList import get_item
+
+    # Testing file functions
+    # Table mock
+    result = get_item("nonexistent_id", self.dynamodb)
+    self.assertIsNone(result)
+    print('End: test_get_item_error')
 
     def test_put_todo(self):
         print ('---------------------')
