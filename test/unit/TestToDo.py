@@ -61,13 +61,22 @@ class TestDatabaseFunctions(unittest.TestCase):
         print ('---------------------')
         print ('Start: test_get_table')
         from src.todoList import get_table
-
         # Testing file functions
         # Table mock
         table = get_table(self.dynamodb)
         self.assertIsNotNone(table)
         self.assertEqual(table.name, os.environ['DYNAMODB_TABLE'])
         print ('End: test_get_table')    
+        
+    def test_get_item_error(self):
+        print('---------------------')
+        print('Start: test_get_item_error')
+        from src.todoList import get_item
+        # Testing file functions
+        # Table mock
+        self.assertRaises(ClientError, get_item, "non_existing_key", self.dynamodb)
+        print('End: test_get_item_error')
+    
 
     def test_put_todo(self):
         print ('---------------------')
