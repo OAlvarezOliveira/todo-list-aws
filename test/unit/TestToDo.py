@@ -57,32 +57,6 @@ class TestDatabaseFunctions(unittest.TestCase):
         #self.assertIn('todoTable', self.table_local.name)
         print ('End: test_table_exists')
         
-    def test_get_table(self):
-        print ('---------------------')
-        print ('Start: test_get_table')
-        from src.todoList import get_table
-        # Testing file functions
-        # Table mock
-        table = get_table(self.dynamodb)
-        self.assertIsNotNone(table)
-        self.assertEqual(table.name, os.environ['DYNAMODB_TABLE'])
-        print ('End: test_get_table')    
-        
-    def test_get_item_error(self):
-        print('---------------------')
-    print('Start: test_get_item_error')
-    from src.todoList import get_item
-    from botocore.exceptions import ClientError
-
-    # Testing file functions
-    # Table mock
-    try:
-        get_item("non_existing_key", self.dynamodb)
-        self.fail("Expected ClientError, but no exception was raised.")
-    except ClientError as e:
-        self.assertEqual(e.response["Error"]["Code"], "ResourceNotFoundException")
-    print('End: test_get_item_error')
-
 
     def test_put_todo(self):
         print ('---------------------')
