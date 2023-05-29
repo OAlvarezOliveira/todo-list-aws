@@ -19,5 +19,5 @@ python test/unit/TestToDo.py
 # Mostrar información de cobertura
 pip show coverage
 coverage run --include=src/todoList.py test/unit/TestToDo.py
-coverage report --show-missing
+coverage report --show-missing -m
 coverage xml
