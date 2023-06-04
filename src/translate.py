@@ -18,7 +18,13 @@ def translate(event, context):
     item["text"] = traduccion
     print("Traducción del texto:\n\r")
     # Imprimir la traducción en formato JSON
-    print(json.dumps(item["text"], cls=decimalencoder.DecimalEncoder, indent=4))
+    print(
+        json.dumps(
+            item["text"],
+            cls=decimalencoder.DecimalEncoder,
+            indent=4
+        )
+    )
 
     # Crear la respuesta según si se encontró o no el elemento
     if item:
