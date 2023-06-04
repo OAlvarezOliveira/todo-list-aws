@@ -255,8 +255,6 @@ class TestDBFunctionsError(unittest.TestCase):
         self.assertRaises(Exception, put_item("", self.dynamodb))
         
         print('Fin: test_put_todo_error')
-     
-    '''
 
     def test_update_todo_error(self):
         print('---------------------')
@@ -279,7 +277,7 @@ class TestDBFunctionsError(unittest.TestCase):
         self.assertRaises(Exception, update_item(updated_text, self.uuid, "", self.dynamodb))
     
         print('Fin: test_update_todo_error')
-       
+     '''   
     def test_delete_todo_error(self):
         print('---------------------')
         print('Inicio: test_delete_todo_error')
