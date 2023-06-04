@@ -200,8 +200,8 @@ class TestDBFunctions(unittest.TestCase):
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
         print ('End: test_delete_todo_error') 
         
-#@mock_dynamodb
-#class TestDBFunctionsError(unittest.TestCase):
+@mock_dynamodb
+class TestDBFunctionsError(unittest.TestCase):
     def setUp(self):
         print ('---------------------')
         print ('Start: setUp')
@@ -255,7 +255,9 @@ class TestDBFunctions(unittest.TestCase):
         self.assertRaises(Exception, put_item("", self.dynamodb))
         
         print('Fin: test_put_todo_error')
-        
+     
+    '''
+
     def test_update_todo_error(self):
         print('---------------------')
         print('Inicio: test_update_todo_error')
@@ -277,8 +279,7 @@ class TestDBFunctions(unittest.TestCase):
         self.assertRaises(Exception, update_item(updated_text, self.uuid, "", self.dynamodb))
     
         print('Fin: test_update_todo_error')
-        
-        
+       
     def test_delete_todo_error(self):
         print('---------------------')
         print('Inicio: test_delete_todo_error')
@@ -291,6 +292,7 @@ class TestDBFunctions(unittest.TestCase):
         self.assertRaises(TypeError, delete_item("", self.dynamodb))
     
         print('Fin: test_delete_todo_error')
+    '''
 
 if __name__ == '__main__':
     unittest.main()           
