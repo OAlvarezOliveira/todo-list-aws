@@ -9,6 +9,8 @@ region = "us-east-1"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Stage=\"default\""
 image_repositories = []
+confirm_changeset = true
+disable_rollback = true
 
 
 
@@ -37,6 +39,5 @@ region = "us-east-1"
 capabilities = "CAPABILITY_IAM"
 parameter_overrides = "Stage=\"production\""
 image_repositories = []
-disable_rollback = true
-
-
+confirm_changeset = true
+disable_rollback = false
