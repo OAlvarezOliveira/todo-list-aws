@@ -1,5 +1,11 @@
 # todo-list-aws
 
+Proyecto desarrollado como caso práctico del **Experto Universitario en DevOps & Cloud**  
+de la Universidad Internacional de La Rioja (UNIR) — Calificación: **Sobresaliente (9,10)**  
+475 horas | 19 ECTS
+
+Basado en el repositorio original de SergioMate. Modificaciones propias: configuración de pipelines Jenkins, samconfig para staging/producción, tests de cobertura con umbral 80% y despliegue en AWS con SAM.
+
 Este proyecto contiene un ejemplo de solución **SAM + Jenkins**. Contiene una aplicación API RESTful de libreta de tareas pendientes (ToDo) y los pipelines que permiten definir el CI/CD para productivizarla.
 
 ## Estructura
